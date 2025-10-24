@@ -1,10 +1,10 @@
 import type { Component } from "solid-js";
-import Comp from "./Comp";
+import Reviews from "./Reviews";
 
 const App: Component = () => {
   return (
     <>
-      <Comp />
+      <Reviews />
     </>
   );
 };
