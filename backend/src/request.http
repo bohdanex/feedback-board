@@ -1,0 +1,15 @@
+GET http://localhost:3001/reviews
+
+###
+
+POST http://localhost:3001/reviews
+Content-Type: application/json
+
+{
+  "name": "Bohdan Mykhats",
+  "comment": "Pure quality",
+  "rating": 3
+}
+
+###
+DELETE http://localhost:3001/reviews-all
