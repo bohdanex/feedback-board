@@ -1,0 +1,23 @@
+{
+  "name": "feedback-board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace frontend\" \"npm run dev --workspace backend\"",
+    "build": "npm run build --workspace frontend && npm run build --workspace backend",
+    "test": "npm test --workspace backend",
+    "lint": "eslint .",
+    "dev:backend": "npm run dev -w backend"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "eslint": "^9.0.0"
+  }
+}
