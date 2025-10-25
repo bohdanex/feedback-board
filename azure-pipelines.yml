@@ -7,7 +7,6 @@ variables:
   imageRepositoryBackend: "feedback-board-backend"
   containerRegistry: "bodatero.azurecr.io"
   dockerRegistryServiceConnection: "bodatero ACR connection"
-  deployment_token: "681e34a6f1f15ae0f94258226b81a18ca8b068545613682c85a26c262d0edf8903-068d4340-7d08-49c5-af9a-4b23bf1e5f630032311016488b03"
 
 pool:
   name: "Default"
