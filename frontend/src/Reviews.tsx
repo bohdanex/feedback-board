@@ -1,17 +1,8 @@
-import { createEffect, createSignal, For } from "solid-js";
+import { createEffect, For } from "solid-js";
 import { deleteReview, getAllReviews } from "./reviewService";
-
-interface Review {
-  id: string;
-  name: string;
-  comment: string;
-  rating: number;
-  created_at: string;
-}
+import { setReviews, getReviews } from "./App";
 
 export default () => {
-  const [getReviews, setReviews] = createSignal<Review[]>([]);
-
   createEffect(() => {
     getAllReviews().then((reviews) => {
       setReviews(reviews);
@@ -19,7 +10,7 @@ export default () => {
   });
 
   return (
-    <table>
+    <table class="w-full">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">

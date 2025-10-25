@@ -1,5 +1,13 @@
 import axiosInstance from "./axios";
 
+export interface Review {
+  id: string;
+  name: string;
+  comment: string;
+  rating: number;
+  created_at: string;
+}
+
 export const getAllReviews = async () => {
   const response = await axiosInstance.get("/reviews");
 
@@ -10,17 +18,17 @@ export const makeReview = async (
   name: string,
   comment: string,
   rating: number
-) => {
+): Promise<Review | null> => {
   try {
-    await axiosInstance.post("/reviews", {
-      name,
-      comment,
-      rating,
-    });
-
-    return true;
+    return (
+      await axiosInstance.post("/reviews", {
+        name,
+        comment,
+        rating,
+      })
+    ).data;
   } catch {
-    return false;
+    return null;
   }
 };
 

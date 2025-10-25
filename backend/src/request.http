@@ -7,8 +7,41 @@ Content-Type: application/json
 
 {
   "name": "Bohdan Mykhats",
-  "comment": "Pure quality",
-  "rating": 3
+  "comment": "Poor quality",
+  "rating": 2
+}
+
+###
+
+POST http://localhost:3001/reviews
+Content-Type: application/json
+
+{
+  "name": "Josh Bonk",
+  "comment": "For what I paid?",
+  "rating": 1
+}
+
+###
+
+POST http://localhost:3001/reviews
+Content-Type: application/json
+
+{
+  "name": "Andrew Brenton",
+  "comment": "I'm really satisfied with the product. I used it daily and it works perfectly!",
+  "rating": 5
+}
+
+###
+
+POST http://localhost:3001/reviews
+Content-Type: application/json
+
+{
+  "name": "Max Slave",
+  "comment": "Good product. Thanks!",
+  "rating": 4
 }
 
 ###
