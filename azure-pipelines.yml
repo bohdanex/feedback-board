@@ -10,7 +10,7 @@ variables:
   dockerRegistryServiceConnection: "bodatero ACR connection"
 
 pool:
-  vmImage: "ubuntu-latest"
+  name: "Default"
 
 stages:
   - stage: Build
