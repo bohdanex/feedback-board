@@ -7,7 +7,6 @@ variables:
   imageRepositoryBackend: "feedback-board-backend"
   containerRegistry: "bodatero.azurecr.io"
   dockerRegistryServiceConnection: "bodatero ACR connection"
-  NODE_VERSION: "20.11.0"
 
 pool:
   name: "Default"
@@ -48,15 +47,10 @@ stages:
               npm run build
             displayName: Build SolidJS app
 
-          - script: |
-              node -v
-              npm -v
-            displayName: "Check Node version"
-
           - task: AzureStaticWebApp@0
             displayName: Deploy to Azure Static Web Apps
             inputs:
-              version: $(NODE_VERSION)
-              app_location: "frontend"
+              app_location: ""
               output_location: "frontend/dist"
               azure_static_web_apps_api_token: "$(deployment_token)"
+              skip_app_build: true
