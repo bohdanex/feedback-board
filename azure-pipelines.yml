@@ -5,20 +5,23 @@ trigger:
 
 variables:
   imageRepositoryBackend: "feedback-board-backend"
-  imageRepositoryFrontend: "feedback-board-frontend"
   containerRegistry: "bodatero.azurecr.io"
   dockerRegistryServiceConnection: "bodatero ACR connection"
+  deployment_token: "681e34a6f1f15ae0f94258226b81a18ca8b068545613682c85a26c262d0edf8903-068d4340-7d08-49c5-af9a-4b23bf1e5f630032311016488b03"
 
 pool:
-  name: "Default"
+  vmImage: "ubuntu-latest"
 
 stages:
   - stage: Build
     jobs:
-      - job: Build_And_Push
+      - job: Build_Backend
+        displayName: Build and Push Backend
         steps:
+          - checkout: self
+
           - task: Docker@2
-            displayName: Build and Push Backend
+            displayName: Build and Push Backend Image
             inputs:
               command: buildAndPush
               repository: $(imageRepositoryBackend)
@@ -26,11 +29,28 @@ stages:
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: latest
 
-          - task: Docker@2
-            displayName: Build and Push Frontend
+      - job: Build_And_Deploy_Frontend
+        displayName: Build and Deploy Frontend
+        steps:
+          - checkout: self
+
+          - task: UseNode@1
             inputs:
-              command: buildAndPush
-              repository: $(imageRepositoryFrontend)
-              dockerfile: frontend/Dockerfile
-              containerRegistry: $(dockerRegistryServiceConnection)
-              tags: latest
+              version: "20.x"
+
+          - script: |
+              cd frontend
+              npm ci
+            displayName: Install dependencies
+
+          - script: |
+              cd frontend
+              npm run build
+            displayName: Build SolidJS app
+
+          - task: AzureStaticWebApp@0
+            displayName: Deploy to Azure Static Web Apps
+            inputs:
+              app_location: "frontend"
+              output_location: "frontend/dist"
+              azure_static_web_apps_api_token: "$(deployment_token)"
