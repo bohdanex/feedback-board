@@ -68,8 +68,5 @@ stages:
               appName: "feedback-board-backend"
               azureSubscription: "test-group connection"
               resourceGroupName: "test-group"
-              configurationStrings: |
-                -WEBSITES_PORT 3001
-                -NODE_ENV "production"
-                -DB_URL $(NEON_DB_URL)
+              configurationStrings: "-WEBSITES_PORT 3001 -NODE_ENV production -DB_URL $(NEON_DB_URL)"
               containers: "bodatero.azurecr.io/feedback-board-backend:latest"
