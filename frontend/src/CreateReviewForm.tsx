@@ -1,5 +1,5 @@
 import { setReviews } from "./App";
-import { makeReview, Review } from "./reviewService";
+import { makeReview } from "./reviewService";
 export default () => {
   let usernameInput: HTMLInputElement | undefined;
   let ratingInput: HTMLInputElement | undefined;

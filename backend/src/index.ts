@@ -30,6 +30,11 @@ const initializeApp = async () => {
       const createResult = reviewsRepo.create(req.body as {});
       const saveResult = await reviewsRepo.save(createResult);
 
+      console.log(
+        `A new review has been added by ${
+          req.body.name
+        } at ${new Date().toUTCString()}`
+      );
       res.status(201).json(saveResult);
     });
 
@@ -48,6 +53,8 @@ const initializeApp = async () => {
     app.delete("/reviews-all", async (_req: Request, res: Response) => {
       const reviewsRepo = dataSource.getRepository(Review);
       const deleteResult = await reviewsRepo.deleteAll();
+
+      console.warn("All reviews are deleted!");
       res.send("Affected " + deleteResult.affected);
     });
 
