@@ -71,5 +71,8 @@ stages:
               deployToSlotOrASE: true
               resourceGroupName: "test-group"
               slotName: "production"
-              configurationStrings: "-WEBSITES_PORT 3001"
+              configurationStrings: |
+                -WEBSITES_PORT 3001
+                -NODE_ENV production
+                -DB_URL $(NEON_DB_URL)
               containers: "bodatero.azurecr.io/feedback-board-backend:latest"

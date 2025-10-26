@@ -15,6 +15,8 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 const initializeApp = async () => {
+  console.log("Database is created");
+
   AppDataSource.initialize().then(async (dataSource) => {
     console.log("✅ Database connected!");
 
@@ -57,15 +59,19 @@ const initializeApp = async () => {
   });
 };
 
-console.log("Checking database existence");
-createDatabase({
-  ifNotExist: true,
-  options: {
-    type: "postgres",
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT) || 5432,
-    username: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASSWORD || "postgres",
-    database: process.env.DB_NAME || "reviews_db",
-  },
-}).then(initializeApp);
+if (process.env.NODE_ENV === "production") {
+  initializeApp();
+} else {
+  console.log("Checking database existence");
+  createDatabase({
+    ifNotExist: true,
+    options: {
+      type: "postgres",
+      host: process.env.DB_HOST || "localhost",
+      port: Number(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER || "postgres",
+      password: process.env.DB_PASSWORD || "postgres",
+      database: process.env.DB_NAME || "reviews_db",
+    },
+  }).then(initializeApp);
+}

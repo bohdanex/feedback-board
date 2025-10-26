@@ -12,6 +12,13 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER || "postgres",
   password: process.env.DB_PASSWORD || "postgres",
   database: process.env.DB_NAME || "reviews_db",
+  url: process.env.DB_URL || undefined,
   synchronize: true, // only for dev
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? {
+          rejectUnauthorized: false,
+        }
+      : false,
   entities: [Review],
 });
