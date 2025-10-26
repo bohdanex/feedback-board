@@ -73,3 +73,5 @@ stages:
               imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:latest"
               acrUsername: "$(ACR_USERNAME)"
               acrPassword: "$(ACR_PASSWORD)"
+              targetPort: 3001
+              ingress: "external"
