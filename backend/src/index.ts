@@ -62,19 +62,19 @@ const initializeApp = async () => {
 console.log("current env", process.env.NODE_ENV);
 console.log("DB_URL", process.env.DB_URL);
 
-if (process.env.NODE_ENV === "production") {
-  initializeApp();
-} else {
-  console.log("Checking database existence");
-  createDatabase({
-    ifNotExist: true,
-    options: {
-      type: "postgres",
-      host: process.env.DB_HOST || "localhost",
-      port: Number(process.env.DB_PORT) || 5432,
-      username: process.env.DB_USER || "postgres",
-      password: process.env.DB_PASSWORD || "postgres",
-      database: process.env.DB_NAME || "reviews_db",
-    },
-  }).then(initializeApp);
-}
+// if (process.env.NODE_ENV === "production") {
+//   initializeApp();
+// } else {
+//   console.log("Checking database existence");
+//   createDatabase({
+//     ifNotExist: true,
+//     options: {
+//       type: "postgres",
+//       host: process.env.DB_HOST || "localhost",
+//       port: Number(process.env.DB_PORT) || 5432,
+//       username: process.env.DB_USER || "postgres",
+//       password: process.env.DB_PASSWORD || "postgres",
+//       database: process.env.DB_NAME || "reviews_db",
+//     },
+//   }).then(initializeApp);
+// }
