@@ -68,5 +68,8 @@ stages:
               appName: "feedback-board-backend"
               azureSubscription: "test-group connection"
               resourceGroupName: "test-group"
-              configurationStrings: "-WEBSITES_PORT 3001 -NODE_ENV production -DB_URL $(NEON_DB_URL)"
+              appSettings: |
+                -DB_URL "postgresql://neondb_owner:npg_Uh2sjiOMSaz5@ep-misty-cell-a8re1hwn-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+              configurationStrings: |
+                WEBSITES_PORT 3001
               containers: "bodatero.azurecr.io/feedback-board-backend:latest"
