@@ -69,4 +69,7 @@ stages:
               azureSubscription: "test-group connection"
               containerAppName: "feedback-board-backend"
               resourceGroup: "test-group"
+              acrName: "bodatero"
               imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:latest"
+              acrUsername: "$(ACR_USERNAME)"
+              acrPassword: "$(ACR_PASSWORD)"
