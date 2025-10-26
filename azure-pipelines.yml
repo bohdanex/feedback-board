@@ -7,6 +7,7 @@ variables:
   imageRepositoryBackend: "feedback-board-backend"
   containerRegistry: "bodatero.azurecr.io"
   dockerRegistryServiceConnection: "bodatero ACR connection"
+  API_URL: ""
 
 pool:
   name: "Default"
@@ -28,6 +29,20 @@ stages:
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: latest
 
+  - stage: Deploy_Backend
+    displayName: Deploy Backend to ACA
+    dependsOn: Build
+    jobs:
+      - job: Deploy_Backend_Job
+        displayName: Deploy Backend
+        steps:
+          - task: AzureContainerApps@1
+            inputs:
+              azureSubscription: "test-group connection"
+              containerAppName: "feedback-board-backend"
+              resourceGroup: "test-group"
+              imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:$(Build.BuildId)"
+
       - job: Build_And_Deploy_Frontend
         displayName: Build and Deploy Frontend
         steps:
@@ -46,6 +61,8 @@ stages:
               cd frontend
               npm run build
             displayName: Build SolidJS app
+            env:
+              VITE_API_URL: "$(API_URL)"
 
           - task: AzureStaticWebApp@0
             displayName: Deploy to Azure Static Web Apps
