@@ -64,14 +64,12 @@ stages:
       - job: Deploy_Backend_Job
         displayName: Deploy Backend
         steps:
-          - task: AzureContainerApps@1
+          - task: AzureWebAppContainer@1
             inputs:
+              appName: "main"
               azureSubscription: "test-group connection"
-              containerAppName: "feedback-board-backend"
-              resourceGroup: "test-group"
-              acrName: "bodatero"
-              imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:latest"
-              acrUsername: "$(ACR_USERNAME)"
-              acrPassword: "$(ACR_PASSWORD)"
-              targetPort: 3001
-              ingress: "external"
+              deployToSlotOrASE: true
+              resourceGroupName: "feedback-board-backend"
+              slotName: "production"
+              configurationStrings: "-WEBSITES_PORT 3001"
+              containers: "bodatero.azurecr.io/feedback-board-backend:latest"
