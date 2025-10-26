@@ -29,20 +29,6 @@ stages:
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: latest
 
-  - stage: Deploy_Backend
-    displayName: Deploy Backend to ACA
-    dependsOn: Build
-    jobs:
-      - job: Deploy_Backend_Job
-        displayName: Deploy Backend
-        steps:
-          - task: AzureContainerApps@1
-            inputs:
-              azureSubscription: "test-group connection"
-              containerAppName: "feedback-board-backend"
-              resourceGroup: "test-group"
-              imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:$(Build.BuildId)"
-
       - job: Build_And_Deploy_Frontend
         displayName: Build and Deploy Frontend
         steps:
@@ -70,3 +56,17 @@ stages:
               app_location: "frontend/dist"
               azure_static_web_apps_api_token: "$(deployment_token)"
               skip_app_build: true
+
+  - stage: Deploy_Backend
+    displayName: Deploy Backend to ACA
+    dependsOn: Build
+    jobs:
+      - job: Deploy_Backend_Job
+        displayName: Deploy Backend
+        steps:
+          - task: AzureContainerApps@1
+            inputs:
+              azureSubscription: "test-group connection"
+              containerAppName: "feedback-board-backend"
+              resourceGroup: "test-group"
+              imageToDeploy: "bodatero.azurecr.io/feedback-board-backend:latest"
