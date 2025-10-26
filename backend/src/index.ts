@@ -57,10 +57,7 @@ const initializeApp = async () => {
   });
 };
 
-console.log("current env", process.env.NODE_ENV);
-console.log("DB_URL", process.env.DB_URL);
-console.log("DB_URL", process.env.TEST_VAR);
-
+console.log("Current environment", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   initializeApp();
 } else {
