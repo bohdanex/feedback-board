@@ -66,10 +66,10 @@ stages:
         steps:
           - task: AzureWebAppContainer@1
             inputs:
-              appName: "main"
+              appName: "feedback-board-backend"
               azureSubscription: "test-group connection"
               deployToSlotOrASE: true
-              resourceGroupName: "feedback-board-backend"
+              resourceGroupName: "test-group"
               slotName: "production"
               configurationStrings: "-WEBSITES_PORT 3001"
               containers: "bodatero.azurecr.io/feedback-board-backend:latest"
