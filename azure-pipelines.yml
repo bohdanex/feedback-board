@@ -7,7 +7,6 @@ variables:
   imageRepositoryBackend: "feedback-board-backend"
   containerRegistry: "bodatero.azurecr.io"
   dockerRegistryServiceConnection: "bodatero ACR connection"
-  API_URL: ""
 
 pool:
   name: "Default"
@@ -71,6 +70,6 @@ stages:
               resourceGroupName: "test-group"
               configurationStrings: |
                 -WEBSITES_PORT 3001
-                -NODE_ENV production
+                -NODE_ENV "production"
                 -DB_URL $(NEON_DB_URL)
               containers: "bodatero.azurecr.io/feedback-board-backend:latest"
